@@ -24,6 +24,8 @@ public abstract class BasePage {
     @FindBy(xpath="//div[@class='logo logo-icon']/h1")
     public WebElement logoLabel;
 
+    @FindBy(xpath = "(//a[@aria-label='Calendar'])[1]")
+    public WebElement Calendar;
 
 
 
