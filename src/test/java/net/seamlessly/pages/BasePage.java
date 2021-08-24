@@ -23,6 +23,8 @@ public abstract class BasePage {
 
     @FindBy(xpath="//div[@class='logo logo-icon']/h1")
     public WebElement logoLabel;
+    @FindBy(xpath = "(//li/a)[8]")
+    public WebElement TaskIcon;
 
 
 
