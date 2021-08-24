@@ -22,6 +22,19 @@ public class ProfileSettStepDefs {
 
         Assert.assertTrue(actualElementsText.containsAll(expectedLabels));
 
-
     }
+
+    @Given("the user enters the name {string}")
+    public void the_user_sendkeys(String name) {
+        new ProfileSettingsPage().fullNameTextbox.clear();
+        new ProfileSettingsPage().fullNameTextbox.sendKeys(name);
+    }
+
+    @Then("the user should be able to see the {string}")
+    public void the_user_should_be_able_to_see_the(String expectedName) {
+
+        String actualName = new ProfileSettingsPage().fullNameTextbox.getAttribute("value");
+        Assert.assertEquals(expectedName,actualName);
+    }
+
 }
