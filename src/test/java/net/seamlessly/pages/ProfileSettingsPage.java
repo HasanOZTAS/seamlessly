@@ -10,6 +10,9 @@ public class ProfileSettingsPage extends BasePage {
     @FindBy(xpath="//h3/label[text()='Full name']")
     public WebElement fullNameLabel;
 
+    @FindBy(xpath="//input[@id='displayname']")
+    public WebElement fullNameTextbox;
+
     @FindBy(xpath="//h3/label[text()='Email']")
     public WebElement emailLabel;
 
