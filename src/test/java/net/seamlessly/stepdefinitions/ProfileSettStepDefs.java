@@ -59,4 +59,11 @@ public class ProfileSettStepDefs {
         Assert.assertEquals("private",actualPrivacy);
     }
 
+    @Then("the user should see the localtime in page")
+    public void the_user_should_see_the_localtime_in_page() {
+
+     BrowserUtils.scrollToElement(new ProfileSettingsPage().localeTimeDiv);
+     Assert.assertTrue(new ProfileSettingsPage().localeTimeDiv.isDisplayed());
+
+    }
 }

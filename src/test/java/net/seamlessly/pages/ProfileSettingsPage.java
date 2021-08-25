@@ -46,6 +46,8 @@ public class ProfileSettingsPage extends BasePage {
     @FindBy(xpath="//a[@data-action='private']")
     public WebElement privateLabel;
 
+    @FindBy(xpath=" //div[@id='localeexample']")
+    public WebElement localeTimeDiv;
 
 
 
