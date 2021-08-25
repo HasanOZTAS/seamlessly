@@ -17,9 +17,17 @@ Feature: Profile Settings Functionality
       | Locale          |
       | Profile picture |
 
-  @wip @SEAMLES-436
+ @SEAMLES-436
    Scenario: User can change "Full name" info under Profile Settings page
      And the user clicks the avatar icon
      And the user clicks settings label
      And the user enters the name "Barış"
      Then the user should be able to see the "Barış"
+
+  @SEAMLES-437
+  Scenario: User can make "Phone number" info as private under Profile Settings page
+    And the user clicks the avatar icon
+    And the user clicks settings label
+    And the user clicks the phone icon-triangle
+    And the user clicks the private label
+    Then the user should see the private is selected
