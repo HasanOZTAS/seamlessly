@@ -26,17 +26,20 @@ public class ContactsStepDefs {
     @Then("the user can put {string} and {string}")
     public void the_user_can_put_and(String firstName, String lastName) {
 
+        new ContactsPage().addFirstName.sendKeys(firstName);
+        new ContactsPage().addLastName.sendKeys(lastName);
 
     }
 
     @When("the user clicks on All contacts button")
     public void the_user_clicks_on_All_contacts_button() {
 
+        new ContactsPage().allContactsBtn.click();
 
     }
 
-    @Then("the user should see the initials in the All contacts list")
-    public void the_user_should_see_the_initials_in_the_All_contacts_list() {
+    @Then("the user should see the {string} in the All contacts list")
+    public void the_user_should_see_the_initials_in_the_All_contacts_list(String initials) {
 
 
     }

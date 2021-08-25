@@ -15,5 +15,8 @@ public class ContactsPage extends BasePage{
     @FindBy(id = "contact-title")
     public WebElement addLastName;
 
+    @FindBy(xpath = "//span[contains(@title, 'All contacts')]")
+    public WebElement allContactsBtn;
+
 
 }
