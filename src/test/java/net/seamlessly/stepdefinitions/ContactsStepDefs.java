@@ -6,6 +6,7 @@ import io.cucumber.java.en.When;
 import net.seamlessly.pages.ContactsPage;
 import net.seamlessly.utilities.BrowserUtils;
 import net.seamlessly.utilities.Driver;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -13,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ContactsStepDefs {
+
+
 
 
     @Given("the user clicks on {string} module")
@@ -35,8 +38,10 @@ public class ContactsStepDefs {
     @Then("the user can put {string} and {string}")
     public void the_user_can_put_and(String firstName, String lastName) {
 
+        // put first name
         new ContactsPage().addFirstName.sendKeys(firstName);
         BrowserUtils.waitFor(3);
+        // put last name
         new ContactsPage().addLastName.sendKeys(lastName);
         BrowserUtils.waitFor(3);
 
@@ -45,22 +50,30 @@ public class ContactsStepDefs {
     @When("the user clicks on All contacts button")
     public void the_user_clicks_on_All_contacts_button() {
 
+        // click on "All contacts button"
         new ContactsPage().allContactsBtn.click();
 
     }
 
     @Then("the user should see the {string} in the All contacts list")
-    public void the_user_should_see_the_initials_in_the_All_contacts_list(String initials) {
+    public void the_user_should_see_the_initials_in_the_All_contacts_list(String expectedInitials) {
 
         BrowserUtils.waitFor(3);
 
         // Create list of all contacts
-        List<WebElement> allContactsList = Driver.get().findElements(By.xpath("//div//div[@class='app-content-list-item-line-one']"));
-
+        List<WebElement> allContactsList = ContactsPage.listOfAllContacts();
 
         for (WebElement contact : allContactsList) {
             System.out.println(contact.getText());
         }
+
+        // change the list to a new list that contains first 3 chars of the contacts
+
+        String actualInitials = allContactsList.get(allContactsList.size()-1).getText();
+        System.out.println("actualInitials = " + actualInitials);
+
+        Assert.assertTrue(actualInitials.contains(expectedInitials));
+
 
     }
 
@@ -70,8 +83,8 @@ public class ContactsStepDefs {
         BrowserUtils.waitFor(3);
 
         // Create list of all contacts
-        List<WebElement> allContactsList = Driver.get().findElements(By.xpath("//div//div[@class='app-content-list-item-line-one']"));
-
+        List<WebElement> allContactsList = ContactsPage.listOfAllContacts();
+        //List<WebElement> allContactsList = Driver.get().findElements(By.xpath("//div//div[@class='app-content-list-item-line-one']"));
 
 
         for (WebElement contact : allContactsList) {
@@ -84,7 +97,15 @@ public class ContactsStepDefs {
     @Then("the user should see total number of contacts")
     public void the_user_should_see_total_number_of_contacts() {
 
-        System.out.println("contactTotalNum = " + new ContactsPage().contactTotalNum.getText());
+        // get actual numbers(size) of "All contacts" from the list of middle menu
+        int actualContactNum = ContactsPage.listOfAllContacts().size();
+        System.out.println("actualContactNum = " + actualContactNum);
+
+        // get expected numbers of "All contacts" from the menu and convert to int.
+        int expectedContactNum = Integer.parseInt(new ContactsPage().contactTotalNum.getText());
+        System.out.println("expectedContactNum = " + expectedContactNum);
+
+        Assert.assertEquals(expectedContactNum, actualContactNum);
 
     }
 
@@ -92,6 +113,7 @@ public class ContactsStepDefs {
     public void the_user_clicks_on_an_existing_contact() {
 
         BrowserUtils.waitFor(2);
+        // click on an existing contact
         new ContactsPage().contactAvatar.click();
 
     }
@@ -108,6 +130,7 @@ public class ContactsStepDefs {
     public void the_user_clicks_on_Choose_from_files_option() {
 
         BrowserUtils.waitFor(1);
+        // click on "Choose from files"
         new ContactsPage().chooseFromFiles.click();
 
 
@@ -117,9 +140,14 @@ public class ContactsStepDefs {
     public void the_user_should_be_able_to_change_the_profile_picture() {
 
         BrowserUtils.waitFor(1);
+        // click on picture
         new ContactsPage().pictureFile.click();
 
+        // click on Choose
         new ContactsPage().chooseButton.click();
+        BrowserUtils.waitFor(1);
+
+        Assert.assertTrue(new ContactsPage().contactAvatar.isEnabled());
 
 
     }

@@ -1,7 +1,12 @@
 package net.seamlessly.pages;
 
+import net.seamlessly.utilities.Driver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import java.util.List;
 
 public class ContactsPage extends BasePage{
 
@@ -38,6 +43,23 @@ public class ContactsPage extends BasePage{
 
     @FindBy (id = "contact-avatar-upload")
     public WebElement avatarPicUpload;
+
+    @FindBy(xpath = "(//div[@class='contact-header-avatar__wrapper'])//div[@class='contact-header-avatar__photo']")
+    public WebElement avatarPhoto;
+
+
+    public ContactsPage() {
+        PageFactory.initElements(Driver.get(),this);
+    }
+
+
+    public static List<WebElement> listOfAllContacts() {
+
+        List<WebElement> allContactsList = Driver.get().findElements(By.xpath("//div//div[@class='app-content-list-item-line-one']"));
+
+        return allContactsList;
+
+    }
 
 
 }
