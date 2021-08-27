@@ -3,6 +3,8 @@ package net.seamlessly.pages;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 public class FolderViewPage extends BasePage {
 
     @FindBy(xpath="/html/body/header/div[1]/ul/li[1]")
@@ -21,4 +23,7 @@ public class FolderViewPage extends BasePage {
     @FindBy(id="view-toggle")
     public WebElement toggle;
 
+
+    @FindBy(xpath="//span[@class='nametext']/span")
+    public List<WebElement> listoffiles;
 }

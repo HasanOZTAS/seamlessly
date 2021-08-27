@@ -4,32 +4,35 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.seamlessly.pages.FolderViewPage;
+import net.seamlessly.utilities.BrowserUtils;
 import net.seamlessly.utilities.ConfigurationReader;
 import net.seamlessly.utilities.Driver;
 import org.junit.Assert;
 
+import java.util.Collections;
+import java.util.List;
+
 public class FolderViewStepDef {
 
+    List<String> actualelement;
 
-    @When("the user is on dashboard")
-    public void theUserIsOnDashboard() {
-
-        Driver.get().get(ConfigurationReader.get("dashboardUrl"));
-    }
 
     @And("the user clicks on name")
     public void theUserClicksOnName() {
         FolderViewPage fp = new FolderViewPage();
+        actualelement = BrowserUtils.getElementsText(new FolderViewPage().listoffiles);
+        System.out.println("before click"+actualelement);
         fp.name.click();
     }
 
 
     @Then("the view of folders should change by name")
     public void theViewOfFoldersShouldChangeByName() {
-         String actual ="";
-         FolderViewPage Folder = new FolderViewPage();
-         Folder.name.click();
+        List<String> expected = BrowserUtils.getElementsText(new FolderViewPage().listoffiles);
+        Collections.sort(actualelement);
 
+        System.out.println("accepted after click"+expected);
+        Assert.assertEquals(expected,actualelement);
 
     }
 
@@ -67,8 +70,6 @@ public class FolderViewStepDef {
     public void theOrderOfTheFoldersShouldChangeByView() {
     }
 
-    @And("the user clicks on files")
-    public void theUserClicksOnFiles() {
-    }
+
 
 }
