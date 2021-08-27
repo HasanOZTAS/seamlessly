@@ -76,14 +76,37 @@ public class NewGroupContactDefs {
         ngcp.starOption.click();
         BrowserUtils.waitFor(4);
         String actual=ngcp.groupDropdownList.get(0).getText();
-        Assert.assertEquals(groupName,actual);
+        Assert.assertTrue(actual.contains(groupName));
+
+    }
+    @When("the user click Choose property type box")
+    public void theUserClickChoosePropertyTypeBox() {
+        new NewGroupContactsPage().propertyType.click();
+        BrowserUtils.waitFor(5);
+    }
+
+    @And("the user select Birthday")
+    public void theUserSelectBirthday() {
+        BrowserUtils.waitFor(10);
+        new NewGroupContactsPage().birthday.click();
+
+    }
+
+    @Then("the user can see Birthday box")
+    public void theUserCanSeeBirthdayBox() {
+        BrowserUtils.waitFor(10);
+        Assert.assertTrue(new NewGroupContactsPage().birthdayBox.isDisplayed());
+
 
     }
 
 
+    @Then("the user see left side group names and should be matching with Groups dropdown menu")
+    public void theUserSeeLeftSideGroupNamesAndShouldBeMatchingWithGroupsDropdownMenu() {
+        NewGroupContactsPage ngcp=new NewGroupContactsPage();
+        String leftSide=ngcp.leftGroupTable.getText();
+        String rightSide=ngcp.groupDropdownList.get(0).getText();
+        Assert.assertTrue(leftSide.contains(rightSide));
 
-
-
-
-
+    }
 }

@@ -35,5 +35,14 @@ public class NewGroupContactsPage extends BasePage{
      @FindBy(css=".name-parts[title='STAR']")
      public  WebElement starOption;
 
+     @FindBy(xpath = "//span[text()='Birthday']")
+    public  WebElement birthday;
+
+     @FindBy(xpath = "(//div[contains(text(),'Birthday')])[1]")
+    public WebElement birthdayBox;
+
+     @FindBy(xpath = "//span[@title='STAR']")
+    public WebElement leftGroupTable;
+
 
 }
