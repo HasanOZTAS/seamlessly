@@ -2,7 +2,7 @@ Feature: Calendar Module
 
   Background:
     Given the user is logged in
-  @wip
+
     Scenario: See Daily-Weekly-Monthly calendar view and create a new event under the Calendar module
       Given the user display daily calendar view
       Given the user can display weekly calendar view
