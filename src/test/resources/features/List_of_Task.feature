@@ -39,7 +39,7 @@ Scenario: Add to task
     And Click Important Star
     And Click  Important Icon
     Then User can see  task on Important page "Homeworks"
-  @wip1
+
   Scenario:Current List
     Given the user on the login page
     And the user is logged in
