@@ -1,8 +1,13 @@
 package net.seamlessly.pages;
 
 import net.seamlessly.utilities.BrowserUtils;
+import net.seamlessly.utilities.Driver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
+
+import java.util.List;
 
 public class TaskPage extends BasePage{
 @FindBy(xpath = "//span[contains(.,'Add List…')]")
@@ -14,7 +19,7 @@ public WebElement AddListIcon;
 @FindBy(xpath = "(//input[@title='Save'])[4]")
     public WebElement SaveIcon;
 
-@FindBy(xpath = "(//span[@title='weekend'])")
+@FindBy(xpath = "(//span[@title='School'])")
     public WebElement LeftDropdownResult;
 
 @FindBy(xpath = "//input[@id='target']")
@@ -41,22 +46,22 @@ public WebElement AddListIcon;
     public WebElement CurrentIcon;
 @FindBy(xpath = "//span[.='Homeworks']")
     public WebElement CurrentResult;
-@FindBy(xpath ="//span[@title='School']" )
-    public WebElement deleteItem;
-@FindBy(css = "[aria-controls='menu-mwfhc']")
+@FindBy(css = "[aria-controls='menu-ipgzt']")
     public WebElement Optiondots;
-@FindBy(xpath = "//span[.='Delete']")
+@FindBy(css = "[aria-controls='menu-lddya']")
     public WebElement DeleteIcon;
 
 
 
-public void deleteList(){
 
-        deleteItem.click ();
+
+
+public void deleteList(String input){
+    String locator="//span[@title='"+input+"'])";
+    Driver.get ().findElement ( By.xpath ( locator ) ).click ();
         BrowserUtils.waitFor ( 1 );
-        Optiondots.click ();
-    BrowserUtils.waitFor ( 1 );
-        DeleteIcon.click ();
+    Optiondots.click ();
+    DeleteIcon.click ();
         
 
 

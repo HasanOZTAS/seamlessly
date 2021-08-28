@@ -30,18 +30,27 @@ public class List_of_Task_StepDefs {
 
     @Then("User cans see left drop down menu {string} appear")
     public void user_cans_see_left_drop_down_menu_appear(String Expected) {
+      //  System.out.println ("Result= "+BrowserUtils.getElementsText ( new TaskPage ().leftSideList ).get ( 0 ));
+
         Assert.assertEquals (Expected,new TaskPage ().LeftDropdownResult.getAttribute ( "title" )  );
+        BrowserUtils.waitFor ( 5 );
+
     }
 
     @When("Enter your task {string}")
     public void enter_your_task(String task) {
         new TaskPage ().AddtoTask.sendKeys ( task );
         new TaskPage ().AddtoTask.sendKeys ( Keys.ENTER);
+
+
     }
 
     @Then("User can see created task {string}")
     public void user_can_see_created_task(String Expected) {
         Assert.assertEquals ( Expected,new TaskPage ().TaskResult.getText () );
+        BrowserUtils.waitFor ( 3 );
+        new TaskPage ().deleteList (Expected);
+
 
     }
     @When("Click check box of task done")
@@ -58,6 +67,7 @@ public class List_of_Task_StepDefs {
     @Then("User can see task done {string}")
     public void user_can_see_task_done(String expected) {
         Assert.assertEquals ( expected,new TaskPage ().CompletedResult.getText () );
+        new TaskPage ().deleteList (expected);
     }
 
     @When("Click Important Star")
@@ -73,6 +83,7 @@ public class List_of_Task_StepDefs {
     @Then("User can see  task on Important page {string}")
     public void user_can_see_task_on_Important_page(String expected) {
         Assert.assertEquals ( expected,new TaskPage ().ImportantResult.getText () );
+        new TaskPage ().deleteList (expected);
     }
 
     @When("Click  Current Icon")
@@ -84,6 +95,7 @@ public class List_of_Task_StepDefs {
     @Then("User can see  task on Current page {string}")
     public void user_can_see_task_on_Current_page(String expected) {
       Assert.assertEquals ( expected,new TaskPage ().CurrentResult.getText () );
+        new TaskPage ().deleteList (expected);
     }
 
 
