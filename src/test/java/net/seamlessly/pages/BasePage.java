@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public abstract class BasePage {
+public class BasePage {
 
     @FindBy(xpath="//div[@class='avatardiv avatardiv-shown']")
     public WebElement avatarIcon;
@@ -23,14 +23,15 @@ public abstract class BasePage {
 
     @FindBy(xpath="//div[@class='logo logo-icon']/h1")
     public WebElement logoLabel;
+
     @FindBy(xpath = "(//li/a)[8]")
     public WebElement TaskIcon;
 
     @FindBy(xpath = "(//a[@aria-label='Calendar'])[1]")
     public WebElement Calendar;
 
-
-
+    @FindBy(xpath = "//header/div/div")
+    public WebElement magnifying_glass_icon;
 
     public BasePage() {
         PageFactory.initElements(Driver.get(),this);
