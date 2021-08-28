@@ -29,4 +29,7 @@ public class FolderViewPage extends BasePage {
 
     @FindBy(xpath="//th[@class='column-size']//span[.='Size']")
     public List<WebElement> listofsize;
+
+    @FindBy(xpath="th[@class='column-mtime']//span[.='Modified']")
+    public List<WebElement> listofmodels;
 }

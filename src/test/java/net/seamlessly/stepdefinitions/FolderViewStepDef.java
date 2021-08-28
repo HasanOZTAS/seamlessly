@@ -60,12 +60,22 @@ public class FolderViewStepDef {
     @And("the user clicks on modified")
     public void theUserClicksOnModified() {
 
-
+        FolderViewPage fp = new FolderViewPage();
+        actualelement = BrowserUtils.getElementsText(new FolderViewPage().listofmodels);
+        System.out.println("before click"+actualelement);
+        fp.modified.click();
 
     }
 
     @Then("the order of the folders should change by date")
     public void theOrderOfTheFoldersShouldChangeByDate() {
+
+
+        List<String> exp = BrowserUtils.getElementsText(new FolderViewPage().listofmodels);
+        Collections.sort(actualelement);
+
+        System.out.println("after click"+exp);
+        Assert.assertEquals(exp,actualelement);
 
     }
 
