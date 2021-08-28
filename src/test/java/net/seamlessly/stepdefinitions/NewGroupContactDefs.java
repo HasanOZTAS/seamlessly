@@ -106,7 +106,7 @@ public class NewGroupContactDefs {
         NewGroupContactsPage ngcp=new NewGroupContactsPage();
         String leftSide=ngcp.leftGroupTable.getText();
         String rightSide=ngcp.groupDropdownList.get(0).getText();
-        Assert.assertTrue(leftSide.contains(rightSide));
+        Assert.assertEquals(leftSide,rightSide);
 
     }
 }

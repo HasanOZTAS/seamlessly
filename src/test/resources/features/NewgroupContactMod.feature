@@ -1,6 +1,6 @@
 @ContactModule
 Feature: New Group under Contact Module
-@PREF-433
+
   Background:
     Given the user is logged in
     When the user click "Contacts" module
