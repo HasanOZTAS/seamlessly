@@ -13,11 +13,11 @@ public class FolderViewPage extends BasePage {
     @FindBy(id="headerName")
     public WebElement name;
 
-    @FindBy(xpath="/html/body/div[3]/div[2]/div[2]/table/thead/tr/th[3]/a/span[1]")
+    @FindBy(xpath="//th[@class='column-size']")
     public WebElement size;
 
 
-    @FindBy(xpath="/html/body/div[3]/div[2]/div[2]/table/thead/tr/th[4]/a/span[1]")
+    @FindBy(xpath="//th[@class='column-mtime']//span[.='Modified']")
     public WebElement modified;
 
     @FindBy(id="view-toggle")
@@ -26,4 +26,7 @@ public class FolderViewPage extends BasePage {
 
     @FindBy(xpath="//span[@class='nametext']/span")
     public List<WebElement> listoffiles;
+
+    @FindBy(xpath="//th[@class='column-size']//span[.='Size']")
+    public List<WebElement> listofsize;
 }

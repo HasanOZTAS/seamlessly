@@ -39,19 +39,28 @@ public class FolderViewStepDef {
     @And("the user clicks on size")
     public void theUserClicksOnSize() {
 
-        new  FolderViewPage().size.click();
+        FolderViewPage fp = new FolderViewPage();
+        actualelement = BrowserUtils.getElementsText(new FolderViewPage().listofsize);
+        System.out.println("before click"+actualelement);
+        fp.size.click();
 
     }
 
     @Then("the order of the folders should change by size")
     public void theOrderOfTheFoldersShouldChangeBySize() {
 
+        List<String> ex = BrowserUtils.getElementsText(new FolderViewPage().listofsize);
+        Collections.sort(actualelement);
+
+        System.out.println("after click"+ex);
+        Assert.assertEquals(ex,actualelement);
+
     }
 
     @And("the user clicks on modified")
     public void theUserClicksOnModified() {
 
-        new FolderViewPage().modified.click();
+
 
     }
 
