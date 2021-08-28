@@ -9,7 +9,7 @@ Feature: User Folder view functionality
     And the user clicks on name
     Then the view of folders should change by name
 
-      @sectestcase
+     @test111
       Scenario:
 
         When the user clicks on size

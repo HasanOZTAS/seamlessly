@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
         },
         features ="src/test/resources/features",
         glue="net/seamlessly/stepdefinitions",
-        tags="@sectestcase",
+        tags="@test111",
         dryRun = false
 
 
