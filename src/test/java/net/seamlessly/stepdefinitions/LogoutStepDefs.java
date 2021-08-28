@@ -8,7 +8,7 @@ public class LogoutStepDefs {
 
     @Given("the user clicks the avatar icon")
     public void the_user_clicks_the_avatar_icon() {
- new HomePage().avatarIcon.click();
+        new HomePage().avatarIcon.click();
     }
 
     @Given("the user clicks the logout label")
@@ -20,6 +20,7 @@ public class LogoutStepDefs {
     public void the_user_clicks_step_back_button() {
         Driver.get().navigate().back();
     }
+
 
 
 }
