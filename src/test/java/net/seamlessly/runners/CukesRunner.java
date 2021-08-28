@@ -11,9 +11,10 @@ import org.junit.runner.RunWith;
         },
         features ="src/test/resources/features",
         glue="net/seamlessly/stepdefinitions",
-        tags="@ContactModule",
-        dryRun = false
 
+        tags="@wip",
+
+        dryRun = false
 
 )
 public class CukesRunner {

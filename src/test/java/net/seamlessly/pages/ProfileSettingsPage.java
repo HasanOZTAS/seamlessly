@@ -10,11 +10,17 @@ public class ProfileSettingsPage extends BasePage {
     @FindBy(xpath="//h3/label[text()='Full name']")
     public WebElement fullNameLabel;
 
+    @FindBy(xpath="//input[@id='displayname']")
+    public WebElement fullNameTextbox;
+
     @FindBy(xpath="//h3/label[text()='Email']")
     public WebElement emailLabel;
 
     @FindBy(xpath=" //h3/label[text()='Phone number']")
     public WebElement phoneNumberLabel;
+
+    @FindBy(xpath="//input[@id='phonescope']")
+    public WebElement phoneNumberPrivacy;
 
     @FindBy(xpath=" //h3/label[text()='Address']")
     public WebElement addressLabel;
@@ -33,6 +39,16 @@ public class ProfileSettingsPage extends BasePage {
 
     @FindBy(xpath=" //h3/label")
     public List<WebElement> personelInfoLabels;
+
+    @FindBy(xpath="(//span[@class='icon-triangle-s'])[4]")
+    public WebElement phoneIconTriangle;
+
+    @FindBy(xpath="//a[@data-action='private']")
+    public WebElement privateLabel;
+
+    @FindBy(xpath=" //div[@id='localeexample']")
+    public WebElement localeTimeDiv;
+
 
 
 }
