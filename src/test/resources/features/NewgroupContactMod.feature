@@ -5,14 +5,14 @@ Feature: New Group under Contact Module
     Given the user is logged in
     When the user click "Contacts" module
 
-@SEAMLESS-441
+@SEAMLES-441
   Scenario: User can create a new group under Contacts Module
     Then the user on the contacts page
     When the user click plus button
     Then the user can see "Create a new group" text in the box
     When the user enter new group name in the box
 
-  @SEAMLESS-442
+  @SEAMLES-442
   Scenario: User can add "Groups" dropdown menu existing inside that specific contact’s own info menu
     Then the user on the contacts page
     When the user click plus button
@@ -23,7 +23,7 @@ Feature: New Group under Contact Module
     And the user click groups dropdown menu
     Then the user can see "STAR"
 
-@SEAMLESS-443
+@SEAMLES-443
   Scenario: User can see all the available groups name through the groups dropdown menu existing in the contact’s own info menu
     Then the user on the contacts page
     When the user click plus button
@@ -35,7 +35,7 @@ Feature: New Group under Contact Module
     Then the user see left side group names and should be matching with Groups dropdown menu
 
 
-  @SEAMLESS-444
+  @SEAMLES-444
   Scenario: User can add a new property as “Birthday”
     When the user click Choose property type box
     And the user select Birthday
