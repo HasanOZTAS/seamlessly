@@ -3,6 +3,7 @@ package net.seamlessly.pages;
 import net.seamlessly.utilities.BrowserUtils;
 import net.seamlessly.utilities.Driver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
@@ -19,7 +20,7 @@ public WebElement AddListIcon;
 @FindBy(xpath = "(//input[@title='Save'])[4]")
     public WebElement SaveIcon;
 
-@FindBy(xpath = "(//span[@title='School'])")
+@FindBy(xpath = "//span[contains(.,'School')]")
     public WebElement LeftDropdownResult;
 
 @FindBy(xpath = "//input[@id='target']")
@@ -36,7 +37,7 @@ public WebElement AddListIcon;
 
 @FindBy(xpath = "//label[@class='reactive no-nav']")
     public WebElement checkBoxOfTask;
-@FindBy(xpath = "//li/div/div/button/span[@class='icon icon-sprt-bw sprt-task-star']")
+@FindBy(xpath = "//li[@id='list_school']//button[@class='icon action-item__menutoggle action-item__menutoggle--default-icon']")
     public WebElement ImportantStar;
 @FindBy(xpath = "//span[@title='Important']")
     public WebElement ImportantIcon;
@@ -46,9 +47,9 @@ public WebElement AddListIcon;
     public WebElement CurrentIcon;
 @FindBy(xpath = "//span[.='Homeworks']")
     public WebElement CurrentResult;
-@FindBy(css = "[aria-controls='menu-ipgzt']")
-    public WebElement Optiondots;
-@FindBy(css = "[aria-controls='menu-lddya']")
+@FindBy(xpath = "//li[@class='app-navigation-entry list reactive router-link-exact-active active']//button[@class='icon action-item__menutoggle action-item__menutoggle--default-icon']")
+public WebElement Optiondots;
+@FindBy(xpath = "//button[contains(.,'Delete')]")
     public WebElement DeleteIcon;
 
 
@@ -57,11 +58,13 @@ public WebElement AddListIcon;
 
 
 public void deleteList(String input){
-    String locator="//span[@title='"+input+"'])";
+    String locator="//span[contains(.,'"+input+"')]";
     Driver.get ().findElement ( By.xpath ( locator ) ).click ();
-        BrowserUtils.waitFor ( 1 );
-    Optiondots.click ();
+        BrowserUtils.waitFor ( 3 );
+    Optiondots.sendKeys ( Keys.ENTER );
+    BrowserUtils.waitFor ( 5 );
     DeleteIcon.click ();
+    BrowserUtils.waitFor ( 10 );
         
 
 
