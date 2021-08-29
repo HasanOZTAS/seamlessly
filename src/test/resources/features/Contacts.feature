@@ -22,7 +22,7 @@ Feature: Contacts Module
     Then the user should see all the contacts as a list inside the middle column
     And the user should see total number of contacts
 
-  @wip
+
     Scenario: User can change the profile picture of any contact by using “Choose from files” option
       When the user clicks on an existing contact
       And the user clicks on the avatar icon on the right side
