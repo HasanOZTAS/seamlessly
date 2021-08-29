@@ -4,7 +4,7 @@ Feature: Contacts Module
     Given the user is logged in
     And the user clicks on "Contacts" module
 
-  @wip
+
   Scenario Outline: User can create a new contact
     When the user clicks on New Contact button
     Then the user can put "<first name>" and "<last name>"
@@ -31,3 +31,15 @@ Feature: Contacts Module
     And the user clicks on the avatar icon on the right side
     Then the user clicks on Choose from files option
     And the user should be able to change the profile picture
+
+  @wip
+Scenario Outline: User can delete any selected contact
+  When the user selects any "<contacts>" on the middle column
+  And the user clicks on Delete option from the three dotted menu
+  Then the user should be able to delete the contact
+
+  Examples:
+    | contacts |
+    | Niyazi     |
+#    | Mike       |
+#    | Seracettin |

@@ -148,6 +148,23 @@ public class ContactsStepDefs {
         BrowserUtils.waitFor(1);
 
         Assert.assertTrue(new ContactsPage().contactAvatar.isEnabled());
+    }
+
+
+    @When("the user selects any {string} on the middle column")
+    public void the_user_selects_any_on_the_middle_column(String string) {
+
+
+    }
+
+    @When("the user clicks on Delete option from the three dotted menu")
+    public void the_user_clicks_on_Delete_option_from_the_three_dotted_menu() {
+
+
+    }
+
+    @Then("the user should be able to delete the contact")
+    public void the_user_should_be_able_to_delete_the_contact() {
 
 
     }
