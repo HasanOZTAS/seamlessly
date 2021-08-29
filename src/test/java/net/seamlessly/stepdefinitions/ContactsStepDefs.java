@@ -5,13 +5,10 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.seamlessly.pages.ContactsPage;
 import net.seamlessly.utilities.BrowserUtils;
-import net.seamlessly.utilities.Driver;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
-import java.util.List;
+
+
 
 public class ContactsStepDefs {
 
@@ -21,6 +18,7 @@ public class ContactsStepDefs {
     @Given("the user clicks on {string} module")
     public void the_user_clicks_on_module(String module) {
 
+        // Navigate to "Contacts" module
         new ContactsPage().navigateTo(module);
         BrowserUtils.waitFor(3);
 
@@ -29,6 +27,7 @@ public class ContactsStepDefs {
     @When("the user clicks on New Contact button")
     public void the_user_clicks_on_New_Contact_button() {
 
+        // Click on "New Contact" button
         new ContactsPage().newContactBtn.click();
         BrowserUtils.waitFor(2);
 
@@ -45,6 +44,8 @@ public class ContactsStepDefs {
         new ContactsPage().addLastName.sendKeys(lastName);
         BrowserUtils.waitFor(3);
 
+        System.out.println(firstName + " " + lastName + "added");
+
     }
 
     @When("the user clicks on All contacts button")
@@ -58,21 +59,16 @@ public class ContactsStepDefs {
     @Then("the user should see the {string} in the All contacts list")
     public void the_user_should_see_the_initials_in_the_All_contacts_list(String expectedInitials) {
 
-        BrowserUtils.waitFor(3);
+        BrowserUtils.waitFor(2);
 
-        // Create list of all contacts
-        List<WebElement> allContactsList = ContactsPage.listOfAllContacts();
+        // list of all contacts in the middle menu.
+        System.out.println(ContactsPage.listOfAllContacts());
 
-        for (WebElement contact : allContactsList) {
-            System.out.println(contact.getText());
-        }
+        // print expected initials
+        System.out.println("expectedInitials = " + expectedInitials);
 
-        // change the list to a new list that contains first 3 chars of the contacts
-
-        String actualInitials = allContactsList.get(allContactsList.size()-1).getText();
-        System.out.println("actualInitials = " + actualInitials);
-
-        Assert.assertTrue(actualInitials.contains(expectedInitials));
+        // Verify that new contact appears in the list with matching initials
+        Assert.assertTrue(ContactsPage.listOfAllContacts().contains(expectedInitials));
 
 
     }
@@ -82,14 +78,8 @@ public class ContactsStepDefs {
 
         BrowserUtils.waitFor(3);
 
-        // Create list of all contacts
-        List<WebElement> allContactsList = ContactsPage.listOfAllContacts();
-        //List<WebElement> allContactsList = Driver.get().findElements(By.xpath("//div//div[@class='app-content-list-item-line-one']"));
-
-
-        for (WebElement contact : allContactsList) {
-            System.out.println(contact.getText());
-        }
+        // List of All contacts inside the middle column
+        System.out.println("listOfAllContacts() = " + ContactsPage.listOfAllContacts());
 
 
     }
@@ -97,14 +87,15 @@ public class ContactsStepDefs {
     @Then("the user should see total number of contacts")
     public void the_user_should_see_total_number_of_contacts() {
 
-        // get actual numbers(size) of "All contacts" from the list of middle menu
+        // get actual number (size) of "All contacts" from the list of middle menu
         int actualContactNum = ContactsPage.listOfAllContacts().size();
         System.out.println("actualContactNum = " + actualContactNum);
 
-        // get expected numbers of "All contacts" from the menu and convert to int.
+        // get expected number of "All contacts" from the menu and convert to int.
         int expectedContactNum = Integer.parseInt(new ContactsPage().contactTotalNum.getText());
         System.out.println("expectedContactNum = " + expectedContactNum);
 
+        // Verify number of all contacts
         Assert.assertEquals(expectedContactNum, actualContactNum);
 
     }
@@ -122,6 +113,7 @@ public class ContactsStepDefs {
     public void the_user_clicks_on_the_avatar_icon_on_the_right_side() {
 
         BrowserUtils.waitFor(1);
+        // Click on the avatar icon on the right sid of the page
         new ContactsPage().avatarMenuOptions.click();
 
     }
@@ -147,24 +139,53 @@ public class ContactsStepDefs {
         new ContactsPage().chooseButton.click();
         BrowserUtils.waitFor(1);
 
+        // Verify the picture changed
         Assert.assertTrue(new ContactsPage().contactAvatar.isEnabled());
     }
 
 
     @When("the user selects any {string} on the middle column")
-    public void the_user_selects_any_on_the_middle_column(String string) {
+    public void the_user_selects_any_on_the_middle_column(String contact) {
 
+        // Find the index number of the contact that will be deleted
+        int indexOfChosenContact = ContactsPage.listOfAllContacts().indexOf(contact);
+        System.out.println("indexOfChosenContact = " + indexOfChosenContact);
 
+        // Find the web element of the chosen contact from the list of web elements according to index number and get the text
+        String chosenContact = ContactsPage.listOfAllContactsWebelements().get(indexOfChosenContact).getText();
+        System.out.println("chosenContact = " + chosenContact);
+
+        // Click on the chosen contact
+        ContactsPage.listOfAllContactsWebelements().get(indexOfChosenContact).click();
+
+        BrowserUtils.waitFor(2);
     }
 
     @When("the user clicks on Delete option from the three dotted menu")
     public void the_user_clicks_on_Delete_option_from_the_three_dotted_menu() {
 
+        // Click on three dotted menu
+        new ContactsPage().threeDotMenu.click();
+
+        // Click on "Delete" option from the menu;
+        new ContactsPage().deleteOption.click();
+
+        BrowserUtils.waitFor(2);
+
 
     }
 
-    @Then("the user should be able to delete the contact")
-    public void the_user_should_be_able_to_delete_the_contact() {
+    @Then("the user should be able to delete the {string}")
+    public void the_user_should_be_able_to_delete_the_contact(String contact) {
+
+        // Print the contact that will be deleted
+        System.out.println("Deleted contact = " + contact);
+
+        // Verify that the contact is not in the list anymore
+        Assert.assertFalse(ContactsPage.listOfAllContacts().contains(contact));
+
+        // Print the new list after deleting
+        System.out.println("ContactsPage.listOfAllContacts() = " + ContactsPage.listOfAllContacts());
 
 
     }
