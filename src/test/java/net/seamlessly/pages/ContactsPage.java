@@ -1,7 +1,13 @@
 package net.seamlessly.pages;
 
+import net.seamlessly.utilities.Driver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactsPage extends BasePage{
 
@@ -17,6 +23,9 @@ public class ContactsPage extends BasePage{
 
     @FindBy(xpath = "//span[contains(@title, 'All contacts')]")
     public WebElement allContactsBtn;
+
+    @FindBy(xpath = "//div//div[@class='app-content-list-item-line-one']")
+    public WebElement contactName;
 
     @FindBy(xpath = "//div//div[@class='app-content-list-item-line-one']")
     public WebElement contactAvatar;
@@ -38,6 +47,44 @@ public class ContactsPage extends BasePage{
 
     @FindBy (id = "contact-avatar-upload")
     public WebElement avatarPicUpload;
+
+    @FindBy(xpath = "(//div[@class='contact-header-avatar__wrapper'])//div[@class='contact-header-avatar__photo']")
+    public WebElement avatarPhoto;
+
+    @FindBy(xpath = "//div[contains(@class,'action-item header-menu')]")
+    public  WebElement threeDotMenu;
+
+    @FindBy(xpath = "(//div[@class='popover__wrapper'])//span[text()='Delete']")
+    public WebElement deleteOption;
+
+
+
+
+    public ContactsPage() {
+        PageFactory.initElements(Driver.get(),this);
+    }
+
+
+    public static List<WebElement> listOfAllContactsWebelements() {
+
+        List<WebElement> allContactsWebElements = Driver.get().findElements(By.xpath("//div//div[@class='app-content-list-item-line-one']"));
+
+        return allContactsWebElements;
+    }
+
+    public static List<String> listOfAllContacts() {
+
+
+        List<String> textOfAllContactsList = new ArrayList<>();
+
+
+        for (WebElement contact : listOfAllContactsWebelements()) {
+            textOfAllContactsList.add(contact.getText());
+        }
+
+        return textOfAllContactsList;
+
+    }
 
 
 }
