@@ -1,10 +1,11 @@
 @new
 Feature: Notes Module
 
-
+  Background:
+    Given the user is logged in
 
   Scenario: Verify user can create a new note
-    Given the user is logged in
+
     When the user click "Notes" module
  #comment
 
