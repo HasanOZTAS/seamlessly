@@ -2,7 +2,7 @@
 Feature: Login With Different Scenarios
 
 
-  @PositiveLogin
+  @PositiveLogin @smoke
   Scenario Outline: : Login with valid credentials
     Given the user on the login page
     Given the user is logged in with "<submitType>"
