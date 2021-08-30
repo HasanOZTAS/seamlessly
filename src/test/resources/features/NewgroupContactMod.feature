@@ -3,7 +3,7 @@ Feature: New Group under Contact Module
   Background:
   Given the user is logged in
 
-    @new
+
   Scenario: User can create a new group under Contacts Module
     When the user click "Contacts" module
     Then the user on the contacts page
