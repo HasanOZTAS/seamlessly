@@ -82,11 +82,33 @@ public class FolderViewStepDef {
     @And("the user clicks on toggle view")
     public void theUserClicksOnToggleView() {
 
-        new FolderViewPage().toggle.click();
+        BrowserUtils.waitFor(1);
+
+        FolderViewPage FP = new FolderViewPage();
+        BrowserUtils.waitForVisibility(FP.toggleview1,15);
+        String actual = FP.toggleview1.getAttribute("class");
+        System.out.println(actual);
+
+        Assert.assertFalse(actual.contains("view-grid"));
+
+
+
+//        String expected = "list-container  has-controls";
+//       String actual1 = new FolderViewPage().toggleview1.getAttribute("class");
+//        System.out.println(actual1);
+//        System.out.println(expected);
+
+       FP.toggle.click();
+
     }
 
     @Then("the order of the folders should change by view")
     public void theOrderOfTheFoldersShouldChangeByView() {
+        FolderViewPage FP = new FolderViewPage();
+        String actual = FP.toggleview1.getAttribute("class");
+
+        Assert.assertTrue(actual.contains("view-grid"));
+
     }
 
 
