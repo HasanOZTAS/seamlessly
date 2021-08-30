@@ -44,7 +44,7 @@ public class ContactsStepDefs {
         new ContactsPage().addLastName.sendKeys(lastName);
         BrowserUtils.waitFor(3);
 
-        System.out.println(firstName + " " + lastName + "added");
+        System.out.println(firstName + " " + lastName + " added");
 
     }
 

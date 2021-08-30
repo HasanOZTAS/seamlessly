@@ -43,7 +43,7 @@ Scenario: Add to task
     And Click  Important Icon
 
     Then User can see  task on Important page "Homeworks" in the "School" list
-  @wip   @SEAMLES-450
+     @SEAMLES-450
 
 
 
