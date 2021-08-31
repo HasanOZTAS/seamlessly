@@ -1,7 +1,7 @@
 
 Feature: Log out Function
 
-
+  @smoke
   Scenario: User can log out and ends up in login page
     Given the user is logged in
     And the user clicks the avatar icon

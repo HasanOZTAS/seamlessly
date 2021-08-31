@@ -32,4 +32,9 @@ public class FolderViewPage extends BasePage {
 
     @FindBy(xpath="th[@class='column-mtime']//span[.='Modified']")
     public List<WebElement> listofmodels;
+
+    @FindBy(id ="filestable")
+    public WebElement toggleview1;
+
+
 }
