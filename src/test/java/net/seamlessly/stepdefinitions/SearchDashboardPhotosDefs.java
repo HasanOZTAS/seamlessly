@@ -18,7 +18,7 @@ public class SearchDashboardPhotosDefs {
     @When("User can click the magnifying glass icon")
     public void user_can_click_the_magnifying_glass_icon() {
         BrowserUtils.waitFor(5);
-        new HomePage().magnifying_glass_icon.click();
+        new SearchDashboardPhotosPage().magnifying_glass_icon.click();
         BrowserUtils.waitFor(5);
     }
 
@@ -72,28 +72,23 @@ public class SearchDashboardPhotosDefs {
     }
 
     @Then("User can see only the images files with the extension of {string} or {string}")
-    public void user_can_see_only_the_images_files_with_the_extension_of_jpeg_jpg(String extension,String extension2) {
-        System.out.println("photo file name = " + new SearchDashboardPhotosPage().extension.getText());
-        Assert.assertTrue(new SearchDashboardPhotosPage().extension.getText().contains(extension)||
-                new SearchDashboardPhotosPage().extension.getText().contains(extension2));
+    public void user_can_see_only_the_images_files_with_the_extension_of_jpeg_jpg(String jpeg,String jpg) {
+        System.out.println("photo file name = " + new SearchDashboardPhotosPage().extension.getAttribute("href"));
+        Assert.assertTrue(new SearchDashboardPhotosPage().extension.getAttribute("href").contains(jpeg)||
+                new SearchDashboardPhotosPage().extension.getAttribute("href").contains(jpg));
 
         BrowserUtils.waitFor(3);
     }
 
     @When("User can click seamlessly icon on dashboard")
     public void user_can_click_seamlessly_icon_on_dashboard() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+       new SearchDashboardPhotosPage().seamlesly_icon.click();
+       BrowserUtils.waitFor(2);
     }
 
-    @Then("User should be on the files page as home page")
-    public void user_should_be_on_the_files_page_as_home_page() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    @Then("User should be on the files page as home page {string}")
+    public void user_should_be_on_the_files_page_as_home_page(String current_Url) {
+       Assert.assertEquals(Driver.get().getCurrentUrl(),current_Url);
     }
 
-    @Then("User can see only the images files with the extension of jpeg")
-    public void userCanSeeOnlyTheImagesFilesWithTheExtensionOfJpeg() {
-        System.out.println();
-    }
 }

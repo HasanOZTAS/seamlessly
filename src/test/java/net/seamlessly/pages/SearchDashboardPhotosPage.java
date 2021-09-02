@@ -1,5 +1,7 @@
 package net.seamlessly.pages;
 
+import net.seamlessly.utilities.Driver;
+import org.junit.Test;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -28,7 +30,7 @@ public class SearchDashboardPhotosPage extends BasePage {
     @FindBy(xpath = "//*[@id='appmenu']/li[2]")
     public WebElement photosIcon;
 
-    @FindBy (xpath = "//*[@id='app-content-vue']/div/div[2]/a")
+    @FindBy (xpath = "//*[@id='app-content-vue']/div/div[2]/a[1]")
     public WebElement extension;
 
 

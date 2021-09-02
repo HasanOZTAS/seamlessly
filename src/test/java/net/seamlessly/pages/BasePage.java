@@ -33,6 +33,9 @@ public class BasePage {
     @FindBy(xpath = "//header/div/div")
     public WebElement magnifying_glass_icon;
 
+    @FindBy(xpath = "//*[@id='nextcloud']/div")
+    public WebElement seamlesly_icon;
+
     public BasePage() {
         PageFactory.initElements(Driver.get(),this);
     }
