@@ -4,14 +4,13 @@ Feature: Upload Edit Delete File Functionality
     Given the user is logged in
 @wip
   Scenario Outline: User can upload a file
-    And the user navigate to "Files" "All files"
-    When the user click on "UploadButton" then click "UploadFile"
-    And  the user navigate <file> and upload it
+    And the user navigate to "files"
+    When the user upload <file>
     Then the user should see <file> on page
 
     Examples:
     |file|
-    |testJPGFile.jpg|
-    |testTXTFile.txt|
+    |"testJPGFile.jpg"|
+    |"testTXTFile.txt"|
 
 
