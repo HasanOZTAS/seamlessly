@@ -39,9 +39,9 @@ public class NotesStepDefs {
         BrowserUtils.waitFor(2);
     }
 
-    @And("the user click three dot on file title")
-    public void theUserClickThreeDotOnFileTitle() {
-        BrowserUtils.clickWithJS(notesPage.rightNoteDots);
+    @And("the user click three dot on {string} title")
+    public void theUserClickThreeDotOnTitle(String note) {
+        notesPage.clickTextThreeDots(note);
     }
 
     @And("the user click add to favorite tab")
@@ -92,13 +92,21 @@ public class NotesStepDefs {
     @And("the user clicks on delete button")
     public void theUserClicksOnDeleteButton() {
         notesPage.clickRightDotsFeatures("Delete note");
+        BrowserUtils.waitFor(2);
     }
 
     @Then("the user should see deletion message")
     public void theUserShouldSeeDeletionMessage() {
-        BrowserUtils.waitFor(2);
+
         String deleteMsg= notesPage.deleteMessage.getText();
         Assert.assertTrue(deleteMsg.contains("Deleted"));
+
+    }
+
+
+    @And("the user should see {string} as favorites")
+    public void theUserShouldSeeAsFavorites(String note) {
+        Assert.assertTrue(notesPage.isTextTitleExistInFavorites(note));
 
     }
 }
