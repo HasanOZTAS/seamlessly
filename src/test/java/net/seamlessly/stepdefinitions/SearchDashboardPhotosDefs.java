@@ -88,7 +88,7 @@ public class SearchDashboardPhotosDefs {
 
     @Then("User should be on the files page as home page {string}")
     public void user_should_be_on_the_files_page_as_home_page(String current_Url) {
-       Assert.assertEquals(Driver.get().getCurrentUrl(),current_Url);
+       Assert.assertTrue(Driver.get().getCurrentUrl().contains(current_Url));
     }
 
 }

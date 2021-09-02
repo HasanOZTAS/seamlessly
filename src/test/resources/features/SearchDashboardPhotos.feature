@@ -1,3 +1,4 @@
+@SEAMLES_496
 Feature: Search Functionalities Dashboard Photos
 
   Background:
@@ -23,12 +24,12 @@ Feature: Search Functionalities Dashboard Photos
     When User can click photos icon
     And  User should be on the "http://qa.seamlessly.net/index.php/apps/photos/"
     Then User can see only the images files with the extension of "jpeg" or "jpg"
-@@SEAMLES_491
+@SEAMLES_491
   Scenario:User can navigate to files page as home page whenever clicking the seamlessly icon on Dashboard
 
     When User can click photos icon
     And User can click seamlessly icon on dashboard
-    Then User should be on the files page as home page "http://qa.seamlessly.net/index.php/apps/files/?dir=/&fileid=32744"
+    Then User should be on the files page as home page "http://qa.seamlessly.net/index.php/apps/files/?dir=/&fileid"
 
 
 
