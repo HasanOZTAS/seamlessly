@@ -40,8 +40,18 @@ public class FilesPage extends BasePage {
    @FindBy(css = ".continue")
    protected WebElement continueButton;
 
-    @FindBy(css = ".cancel primary")
+   @FindBy(css = ".cancel primary")
     protected WebElement cancelButton;
+
+   @FindBy(xpath = "(//span[@class='displayname'])[2]")
+   protected WebElement newFolder;
+
+   @FindBy(xpath = "//input[@value='New folder']")
+   protected WebElement folderNameInput;
+
+   @FindBy(xpath = "//li/a/form/input[@type='submit']")
+   protected WebElement folderSubmit;
+
 
 
    public void uploadFile(String fileName){
@@ -51,18 +61,20 @@ public class FilesPage extends BasePage {
 //       if (fileExists.isDisplayed()){
 //           cancelButton.click();
 //       }
+       BrowserUtils.waitFor(3);
    }
 
-   public String isUploaded(String uploadedName) {
-
-       for (WebElement file:files) {
-           if (uploadedName.contains(file.getText())) {
-               return file.getText();
-           }
-
-       }
-       return null;
-   }
+//   public String isUploaded(String uploadedName) {
+//
+//       for (WebElement file:files) {
+//           if (uploadedName.contains(file.getText())) {
+//               return file.getText();
+//           }
+//
+//       }
+//       return null;
+//
+//   }
 
     public void waitUntilProgressbarDisappear() {
         try {
@@ -72,5 +84,46 @@ public class FilesPage extends BasePage {
             e.printStackTrace();
         }
 
+    }
+
+    public void createFolder(String folderName) {
+        addIcon.click();
+        newFolder.click();
+        folderNameInput.sendKeys(folderName);
+        folderSubmit.click();
+        BrowserUtils.waitFor(3);
+    }
+
+//    public String isCreated(String createdFolder) {
+//
+//        for (WebElement file:files) {
+//
+//            if (createdFolder.equals(file.getText())) {
+//                return file.getText();
+//            }
+//        }
+//        return null;
+//
+//    }
+
+    public String isUploadedOrCreated(String uploadedOrCreated) {
+       if(uploadedOrCreated.contains(".")) {
+
+           for (WebElement file: files) {
+               if (uploadedOrCreated.split("\\.")[0].equals(file.getText())) {
+                   return file.getText();
+               }
+
+           }
+
+       }
+       else {
+           for (WebElement file: files) {
+               if (uploadedOrCreated.equals(file.getText())) {
+                   return file.getText();
+               }
+           }
+       }
+        return null;
     }
 }

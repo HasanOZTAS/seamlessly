@@ -22,19 +22,65 @@ public class UploadEditDeleteFileStepDefs {
     }
 
 
-    @Then("the user should see {string} on page")
-    public void the_user_should_see_on_page(String uploadedFile) {
-        String [] str=uploadedFile.split("\\.");
+//    @Then("the user should see {string} on page")
+//    public void the_user_should_see_on_page(String uploadedFile) {
+//        String [] str=uploadedFile.split("\\.");
+//
+//        String expectedUploadedFile=str[0];
+//        String actualUploadedFile=new FilesPage().isUploaded(uploadedFile);
+//
+//        System.out.println("expectedUploadedFile = " + expectedUploadedFile);
+//        System.out.println("actualUploadedFile = " + actualUploadedFile);
+//        Assert.assertEquals(expectedUploadedFile, actualUploadedFile);
+//
+//
+//    }
 
-        String expectedUploadedFile=str[0];
-        String actualUploadedFile=new FilesPage().isUploaded(uploadedFile);
+    @When("the user create new folder {string}")
+    public void the_user_create_new_folder_TestFolder(String fileName) {
+        new FilesPage().createFolder(fileName);
+    }
 
-        System.out.println("expectedUploadedFile = " + expectedUploadedFile);
-        System.out.println("actualUploadedFile = " + actualUploadedFile);
-        Assert.assertEquals(expectedUploadedFile, actualUploadedFile);
+//    @Then("the user should see folder on page {string}")
+//    public void the_user_should_see_TestFolder_on_page(String createdFolder) {
+//        String expectedFolder=createdFolder;
+//        String actualFolder=new FilesPage().isCreated(createdFolder);
+//
+//        Assert.assertEquals(expectedFolder, actualFolder);
+//
+//    }
 
+    @Then("the user should see folder on page {string}")
+    public void the_user_should_see_TestFolder_on_page(String createdFolder) {
+        String expectedFolder=createdFolder;
+        String actualFolder=new FilesPage().isUploadedOrCreated(createdFolder);
+
+        Assert.assertEquals(expectedFolder, actualFolder);
 
     }
+
+    @Then("the user should see {string} on page")
+    public void the_user_should_see_on_page(String addedFile) {
+
+        if (addedFile.contains(".")) {
+            String [] str=addedFile.split("\\.");
+
+            String expectedUploadedFile=str[0];
+            String actualUploadedFile=new FilesPage().isUploadedOrCreated(addedFile);
+
+            System.out.println("expectedUploadedFile = " + expectedUploadedFile);
+            System.out.println("actualUploadedFile = " + actualUploadedFile);
+            Assert.assertEquals(expectedUploadedFile, actualUploadedFile);
+        }
+        else {
+            String expectedFolder=addedFile;
+            String actualFolder=new FilesPage().isUploadedOrCreated(addedFile);
+
+            Assert.assertEquals(expectedFolder, actualFolder);
+        }
+
+    }
+
 
 
 
