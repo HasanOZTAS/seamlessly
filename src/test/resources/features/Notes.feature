@@ -16,8 +16,8 @@ Feature: Notes Module
 
 
     Examples:
-      | notes                      |
-      | you are a perfect SDET!    |
+      | notes                   |
+      | you are a perfect SDET! |
 
 
   Scenario Outline: User can add any note to the favorites
@@ -32,9 +32,6 @@ Feature: Notes Module
     And the user click "Notes" module
     And the user click three dot on "<notes>" title
     And the user clicks on delete button
-
-
-
     Examples:
       | notes              |
       | sample text for AC |
@@ -50,8 +47,8 @@ Feature: Notes Module
     And the user click three dot on "<notes>" title
     And the user clicks on delete button
     Examples:
-      | notes                      |
-      | you are a perfect SDET!    |
+      | notes                   |
+      | you are a perfect SDET! |
 
 
   Scenario Outline: User can create a new category by passing a new category name from inside the notes details
@@ -66,10 +63,10 @@ Feature: Notes Module
     And the user click three dot on "<notes>" title
     And the user clicks on delete button
     Examples:
-      | name              |
-      | New Test Category |
+      | name              | notes             |
+      | New Test Category | You are the best! |
 
-
+  @wip
   Scenario Outline: User can delete any note
     When the user click "Notes" module
     And the user click New Note
