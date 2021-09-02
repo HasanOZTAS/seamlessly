@@ -1,3 +1,4 @@
+@wip
 Feature: Upload Edit Delete File Functionality
 
   Background:
@@ -37,12 +38,15 @@ Feature: Upload Edit Delete File Functionality
     Examples:
       |item | folder |
       |"3d-3"|"Notlar"|
-  @wip
+
   Scenario Outline: User can delete any selected item
     When the user delete any selected <item>
     Then the user should see <item> in deleted files
 
     Examples:
       |item |
-      |"3d-3"|"
+      |"3d-3"|
+
+  Scenario: User can see the total number of files and folders under the files list table
+    Then the user should see total number of files and folders
 

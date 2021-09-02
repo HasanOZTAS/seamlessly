@@ -11,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 
 import javax.swing.*;
+import java.io.File;
 
 public class UploadEditDeleteFileStepDefs {
 
@@ -117,6 +118,28 @@ public class UploadEditDeleteFileStepDefs {
         String actualResult=new FilesPage().isInDeletedFile(item);
 
         Assert.assertEquals(expectedResult, actualResult);
+
+    }
+
+    @Then("the user should see total number of files and folders")
+    public void the_user_should_see_total_number_of_files_and_folders() {
+
+        int expectedFileNumber=new FilesPage().getDisplayedFileNumber();
+        int actualFileNumber=new FilesPage().countFile();
+
+//        System.out.println("expectedFileNumber = " + expectedFileNumber);
+//        System.out.println("actualFileNumber = " + actualFileNumber);
+
+        Assert.assertEquals(expectedFileNumber, actualFileNumber);
+
+        int expectedFolderNumber=new FilesPage().getDisplayedFolderNumber();
+        int actualFolderNumber=new FilesPage().countFolder();
+
+//        System.out.println("expectedFolderNumber = " + expectedFolderNumber);
+//        System.out.println("actualFolderNumber = " + actualFolderNumber);
+
+        Assert.assertEquals(expectedFolderNumber, actualFolderNumber);
+
 
     }
 

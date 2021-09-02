@@ -72,6 +72,19 @@ public class FilesPage extends BasePage {
    @FindBy(xpath = "//li[@class=' action-delete-container']")
    protected WebElement deleteFile;
 
+   @FindBy(xpath = "//tr[@data-type='file']")
+   protected List<WebElement> file;
+
+    @FindBy(xpath = "//tr[@data-type='dir']")
+    protected List<WebElement> folder;
+
+    @FindBy(css = ".dirinfo")
+    protected WebElement folderDisAmount;
+
+    @FindBy(css = ".fileinfo")
+    protected WebElement fileDisAmount;
+
+
 
 
    public void uploadFile(String fileName){
@@ -157,6 +170,7 @@ public class FilesPage extends BasePage {
                moveOrCopy.click();
                 for (WebElement fld:chooseFolder) {
                     if (fld.getText().equals(folder)) {
+                        BrowserUtils.waitFor(1);
                         fld.click();
                         moveButton.click();
                     }
@@ -220,6 +234,44 @@ public class FilesPage extends BasePage {
             }
         }
 
+    }
+
+    public int countFile() {
+       navigateTo("files");
+       int fileAmount=0;
+        for (WebElement fl:file) {
+            ++fileAmount;
+        }
+        //System.out.println("fileAmount = " + fileAmount);
+        return fileAmount;
+
+    }
+
+    public int countFolder() {
+        navigateTo("files");
+        int folderAmount=0;
+        for (WebElement fl:folder) {
+            ++folderAmount;
+        }
+        //System.out.println("folderAmount = " + folderAmount);
+        return folderAmount;
+
+    }
+
+    public int getDisplayedFileNumber() {
+        navigateTo("files");
+       String[] str=fileDisAmount.getText().split(" ");
+       int fileNum=Integer.parseInt(str[0]);
+        //System.out.println("fileNum = " + fileNum);
+        return fileNum;
+    }
+
+    public int getDisplayedFolderNumber() {
+        navigateTo("files");
+       String [] str=folderDisAmount.getText().split(" ");
+       int folderNum= Integer.parseInt(str[0]);
+        //System.out.println("folderNum = " + folderNum);
+        return folderNum;
     }
 
 }
