@@ -1,6 +1,7 @@
 package net.seamlessly.pages;
 
 
+import net.seamlessly.utilities.BrowserUtils;
 import net.seamlessly.utilities.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -19,11 +20,33 @@ public class NotesPage extends BasePage{
     @FindBy(xpath = "//ul[@class='app-navigation__list']//li[3]//span")
     public WebElement lastNote;
 
-    @FindBy(xpath = "//ul[@class='app-navigation__list']//li[3]//div/button")
+    @FindBy(xpath = "(//*[@id='app-navigation-vue']/ul//li[@class='app-navigation-entry']//button)[5]")
     public WebElement rightNoteDots;
 
+    @FindBy(xpath = "(//div[@id='note-container']//button)[1]")
+    public WebElement leftThreeDots;
+
+    @FindBy(xpath = "//span[text()='Details']")
+    public WebElement DetailsBtn;
+
+    @FindBy(xpath = "//p[@class='app-sidebar-header__subtitle']")
+    public WebElement detailsText;
+
+    @FindBy(id = "category")
+    public WebElement categoryInput;
+
+    @FindBy(css = ".icon-confirm.loading")
+    public WebElement forwardBtn;
+
+    @FindBy(xpath = "//span[@title='Categories']")
+    public WebElement categoriesTab;
+
+    @FindBy(xpath = "//span[@class='deletedLabel']")
+    public WebElement deleteMessage;
+
+
     public void clickRightDotsFeatures(String featureName){
-        Driver.get().findElement(By.xpath("//span[@class='action-button__text'][.='"+featureName+"']")).click();
+        BrowserUtils.clickWithJS(Driver.get().findElement(By.xpath("//span[@class='action-button__text'][.='"+featureName+"']")));
     }
 
 }
