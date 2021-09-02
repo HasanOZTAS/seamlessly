@@ -5,7 +5,10 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.seamlessly.pages.FilesPage;
 
+import net.seamlessly.utilities.Driver;
 import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 
 import javax.swing.*;
 
@@ -80,6 +83,30 @@ public class UploadEditDeleteFileStepDefs {
         }
 
     }
+
+    @When("the user move the {string} to {string}")
+    public void the_user_move_the_to(String item, String folder) {
+        new FilesPage().moveTo(item, folder);
+    }
+
+    @Then("the user should see {string} in {string}")
+    public void the_user_should_see_in(String item, String folder) {
+        new FilesPage().openItem(folder);
+        String path="//tr[@data-path='/"+folder+"']//span[text()='"+item+"']";
+        new FilesPage().scrollDown();
+        String actualresult=Driver.get().findElement(By.xpath(path)).getText();
+        String expectedResult=item;
+
+        Assert.assertEquals(expectedResult, actualresult);
+
+    }
+
+    @When("the user copy the {string} to {string}")
+    public void the_user_copy_the_to(String item, String folder) {
+        new FilesPage().copyTo(item, folder);
+
+    }
+
 
 
 
