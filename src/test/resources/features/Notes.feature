@@ -3,7 +3,7 @@ Feature: Notes Module
 
   Background:
     Given the user is logged in
-
+  @SEAMLES-475
   Scenario Outline: Verify user can create a new note
 
     When the user click "Notes" module
@@ -19,7 +19,7 @@ Feature: Notes Module
       | notes                   |
       | you are a perfect SDET! |
 
-
+  @SEAMLES-492
   Scenario Outline: User can add any note to the favorites
     When the user click "Notes" module
     And the user click New Note
@@ -36,7 +36,7 @@ Feature: Notes Module
       | notes              |
       | sample text for AC |
 
-
+  @SEAMLES-493
   Scenario Outline: User can see the number of letters and words that the note includes under the note title when clicked on the details of the note
     When the user click "Notes" module
     And the user click New Note
@@ -50,7 +50,7 @@ Feature: Notes Module
       | notes                   |
       | you are a perfect SDET! |
 
-
+  @SEAMLES-494
   Scenario Outline: User can create a new category by passing a new category name from inside the notes details
     When the user click "Notes" module
     And the user click New Note
@@ -66,7 +66,7 @@ Feature: Notes Module
       | name              | notes             |
       | New Test Category | You are the best! |
 
-  @wip
+  @wip @SEAMLES-495
   Scenario Outline: User can delete any note
     When the user click "Notes" module
     And the user click New Note
