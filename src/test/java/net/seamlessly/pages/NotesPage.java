@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class NotesPage extends BasePage{
+public class NotesPage extends BasePage {
     @FindBy(id = "notes_new_note")
     public WebElement createNewNote;
 
@@ -44,9 +44,21 @@ public class NotesPage extends BasePage{
     @FindBy(xpath = "//span[@class='deletedLabel']")
     public WebElement deleteMessage;
 
+    public boolean isTextTitleExistInFavorites(String text) {
+        String getText = Driver.get().findElement(By.xpath("//span[@class='innernametext'][contains(text(),'" + (text.substring(0, 10)) + "')]")).getText();
+        System.out.println("getText = " + getText);
+        return getText.contains(text.substring(0, 10));
+    }
 
-    public void clickRightDotsFeatures(String featureName){
-        BrowserUtils.clickWithJS(Driver.get().findElement(By.xpath("//span[@class='action-button__text'][.='"+featureName+"']")));
+    public void clickTextThreeDots(String text) {
+        WebElement threeDots = Driver.get().findElement(By.xpath("(//div[@id='app-navigation-vue']//ul)[1]//li//span[contains(@title,'" + (text.substring(0, 10)) + "')]/../..//button"));
+        BrowserUtils.hover(threeDots);
+        BrowserUtils.clickWithJS(threeDots);
+    }
+
+
+    public void clickRightDotsFeatures(String featureName) {
+        BrowserUtils.clickWithJS(Driver.get().findElement(By.xpath("//span[@class='action-button__text'][.='" + featureName + "']")));
     }
 
 }
