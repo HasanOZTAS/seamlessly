@@ -104,6 +104,19 @@ public class UploadEditDeleteFileStepDefs {
     @When("the user copy the {string} to {string}")
     public void the_user_copy_the_to(String item, String folder) {
         new FilesPage().copyTo(item, folder);
+    }
+
+    @When("the user delete any selected {string}")
+    public void the_user_delete_any_selected(String item) {
+        new FilesPage().deleteItem(item);
+    }
+
+    @Then("the user should see {string} in deleted files")
+    public void the_user_should_see_in_deleted_files(String item) {
+        String expectedResult=item;
+        String actualResult=new FilesPage().isInDeletedFile(item);
+
+        Assert.assertEquals(expectedResult, actualResult);
 
     }
 

@@ -66,6 +66,12 @@ public class FilesPage extends BasePage {
    @FindBy(xpath = "//div[@class='oc-dialog-buttonrow twobuttons aside']/button[contains(text(),'Copy')]")
    protected WebElement copyButton;
 
+   @FindBy(xpath = "//li[@data-id='trashbin']")
+   protected WebElement deletedFiles;
+
+   @FindBy(xpath = "//li[@class=' action-delete-container']")
+   protected WebElement deleteFile;
+
 
 
    public void uploadFile(String fileName){
@@ -193,6 +199,27 @@ public class FilesPage extends BasePage {
                 }
             }
         }
+    }
+
+    public String isInDeletedFile(String item) {
+       String result;
+       deletedFiles.click();
+       scrollDown();
+       result=Driver.get().findElement(By.xpath("//tr//span[text()='"+item+"']")).getText();
+       return result;
+    }
+
+    public void deleteItem(String item) {
+        int i = 0;
+        for (WebElement file : files) {
+            i++;
+            if (file.getText().equals(item)) {
+                Driver.get().findElement(By.xpath("(//a[@class='action action-menu permanent'])" + "[" + i + "]")).click();
+                BrowserUtils.waitFor(2);
+                deleteFile.click();
+            }
+        }
+
     }
 
 }

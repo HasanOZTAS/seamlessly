@@ -29,7 +29,7 @@ Feature: Upload Edit Delete File Functionality
     Examples:
     |item | folder |
     |"gul"|"Notlar"|
-  @wip
+
   Scenario Outline: User can copy any item to any folder
     When the user copy the <item> to <folder>
     Then the user should see <item> in <folder>
@@ -37,4 +37,12 @@ Feature: Upload Edit Delete File Functionality
     Examples:
       |item | folder |
       |"3d-3"|"Notlar"|
+  @wip
+  Scenario Outline: User can delete any selected item
+    When the user delete any selected <item>
+    Then the user should see <item> in deleted files
+
+    Examples:
+      |item |
+      |"3d-3"|"
 
