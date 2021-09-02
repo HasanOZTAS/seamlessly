@@ -49,6 +49,14 @@ public class BrowserUtils {
         return elemTexts;
     }
 
+    public static List<String> getAttributes(List<WebElement> list,String attribute) {
+        List<String> elemTexts = new ArrayList<>();
+        for (WebElement el : list) {
+            elemTexts.add(el.getAttribute(attribute));
+        }
+        return elemTexts;
+    }
+
     /**
      * Extracts text from list of elements matching the provided locator into new List<String>
      *
