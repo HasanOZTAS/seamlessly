@@ -3,7 +3,9 @@ Feature: Search Functionalities Dashboard Photos
 
   Background:
       Given the user is logged in
+
 @SEAMLES_440 @smoke
+
     Scenario:User can search file typing its name through the magnifying glass icon and
              see the details side page of the file when clicked on it.
 

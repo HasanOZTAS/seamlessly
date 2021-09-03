@@ -42,6 +42,7 @@ Scenario: Add to task
     And Click Important Star
     And Click  Important Icon
 
+
     Then User can see  task on Important page "Homeworks" in the "School" list
      @SEAMLES-450
 
