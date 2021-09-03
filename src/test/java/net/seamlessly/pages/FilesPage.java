@@ -10,7 +10,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FilesPage extends BasePage {
@@ -110,17 +109,6 @@ public class FilesPage extends BasePage {
        BrowserUtils.waitFor(3);
    }
 
-//   public String isUploaded(String uploadedName) {
-//
-//       for (WebElement file:files) {
-//           if (uploadedName.contains(file.getText())) {
-//               return file.getText();
-//           }
-//
-//       }
-//       return null;
-//
-//   }
 
     public void waitUntilProgressbarDisappear() {
         try {
@@ -140,17 +128,6 @@ public class FilesPage extends BasePage {
         BrowserUtils.waitFor(3);
     }
 
-//    public String isCreated(String createdFolder) {
-//
-//        for (WebElement file:files) {
-//
-//            if (createdFolder.equals(file.getText())) {
-//                return file.getText();
-//            }
-//        }
-//        return null;
-//
-//    }
 
     public String isUploadedOrCreated(String uploadedOrCreated) {
 
