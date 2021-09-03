@@ -24,8 +24,14 @@ public class FilesPage extends BasePage {
    @FindBy(css = "#file_upload_start")
     protected WebElement uploadFile;
 
-   @FindBy(xpath = "//span[@class='innernametext']")
-    protected List<WebElement> files;
+    @FindBy(xpath = "//tr[@data-type='file' or @data-type='dir']")
+    protected List<WebElement> filesList;
+
+//    @FindBy(xpath = "//span[@class='innernametext']")
+//    protected WebElement filesName;
+
+//    @FindBy(xpath = "//span[@class='extension']")
+//    protected WebElement filesExt;
 
    @FindBy(css = "#uploadprogressbar")
    protected WebElement progressbar;
@@ -57,7 +63,7 @@ public class FilesPage extends BasePage {
    @FindBy(xpath = "//a[@class='menuitem action action-movecopy permanent']")
    protected WebElement moveOrCopy;
 
-   @FindBy(xpath = "//span[@class='filename-parts__first']")
+   @FindBy(xpath = "//div[@class='filelist-container']//tr[@data-type='dir']")
    protected List<WebElement> chooseFolder;
 
    @FindBy(xpath = "//button[@class='primary']")
@@ -76,13 +82,23 @@ public class FilesPage extends BasePage {
    protected List<WebElement> file;
 
     @FindBy(xpath = "//tr[@data-type='dir']")
-    protected List<WebElement> folder;
+    protected List<WebElement> folderList;
 
     @FindBy(css = ".dirinfo")
     protected WebElement folderDisAmount;
 
     @FindBy(css = ".fileinfo")
     protected WebElement fileDisAmount;
+
+    @FindBy(xpath = "//div[@class='crumb']")
+    protected WebElement homeFolderIcon;
+
+//    @FindBy(xpath = "//*[@class='nametext']")
+//    protected List<WebElement> fileList;
+//
+    @FindBy(xpath = "//td[@class='filename']//span[@class='nametext extra-data']")
+    protected List<WebElement> deletedFilesList;
+
 
 
 
@@ -91,9 +107,6 @@ public class FilesPage extends BasePage {
        addIcon.click();
        uploadFile.sendKeys((System.getProperty("user.dir") + "\\src\\test\\resources\\uploadedFiles\\"+fileName));
        waitUntilProgressbarDisappear();
-//       if (fileExists.isDisplayed()){
-//           cancelButton.click();
-//       }
        BrowserUtils.waitFor(3);
    }
 
@@ -140,36 +153,26 @@ public class FilesPage extends BasePage {
 //    }
 
     public String isUploadedOrCreated(String uploadedOrCreated) {
-       if(uploadedOrCreated.contains(".")) {
 
-           for (WebElement file: files) {
-               if (uploadedOrCreated.split("\\.")[0].equals(file.getText())) {
-                   return file.getText();
-               }
+           for (WebElement file: filesList) {
+               if (uploadedOrCreated.equals(file.getAttribute("data-file"))) {
 
-           }
-
-       }
-       else {
-           for (WebElement file: files) {
-               if (uploadedOrCreated.equals(file.getText())) {
-                   return file.getText();
+                   return file.getAttribute("data-file");
                }
            }
-       }
-        return null;
+           return  null;
     }
 
     public void moveTo(String item, String folder) {
        int i=0;
-       for (WebElement file:files) {
+       for (WebElement file:filesList) {
             i++;
-            if (file.getText().equals(item)) {
+            if (item.equals(file.getAttribute("data-file"))) {
                Driver.get().findElement(By.xpath("(//a[@class='action action-menu permanent'])"+"["+i+"]")).click();
                BrowserUtils.waitFor(2);
                moveOrCopy.click();
                 for (WebElement fld:chooseFolder) {
-                    if (fld.getText().equals(folder)) {
+                    if (folder.equals(fld.getAttribute("data-entryname"))) {
                         BrowserUtils.waitFor(1);
                         fld.click();
                         moveButton.click();
@@ -181,9 +184,9 @@ public class FilesPage extends BasePage {
 
     public void openItem(String itemName) {
        navigateTo("files");
-        for (WebElement item:files) {
-            if(item.getText().equals(itemName)) {
-                item.click();
+        for (WebElement file:filesList) {
+            if(itemName.equals(file.getAttribute("data-file"))) {
+                file.click();
             }
         }
     }
@@ -199,14 +202,15 @@ public class FilesPage extends BasePage {
 
     public void copyTo(String item, String folder) {
         int i=0;
-        for (WebElement file:files) {
+        for (WebElement file:filesList) {
             i++;
-            if (file.getText().equals(item)) {
+            if (item.equals(file.getAttribute("data-file"))) {
                 Driver.get().findElement(By.xpath("(//a[@class='action action-menu permanent'])"+"["+i+"]")).click();
                 BrowserUtils.waitFor(2);
                 moveOrCopy.click();
                 for (WebElement fld:chooseFolder) {
-                    if (fld.getText().equals(folder)) {
+                    if (folder.equals(fld.getAttribute("data-entryname"))) {
+                        BrowserUtils.waitFor(1);
                         fld.click();
                         copyButton.click();
                     }
@@ -216,19 +220,25 @@ public class FilesPage extends BasePage {
     }
 
     public String isInDeletedFile(String item) {
-       String result;
+
        deletedFiles.click();
-       scrollDown();
-       result=Driver.get().findElement(By.xpath("//tr//span[text()='"+item+"']")).getText();
-       return result;
+        for (WebElement file: deletedFilesList) {
+
+            scrollDown();
+            if(item.equals(file.getAttribute("data-original-title"))){
+                return file.getAttribute("data-original-title");
+            }
+        }
+
+       return null;
     }
 
     public void deleteItem(String item) {
         int i = 0;
-        for (WebElement file : files) {
+        for (WebElement file : filesList) {
             i++;
-            if (file.getText().equals(item)) {
-                Driver.get().findElement(By.xpath("(//a[@class='action action-menu permanent'])" + "[" + i + "]")).click();
+            if (item.equals(file.getAttribute("data-file"))) {
+                Driver.get().findElement(By.xpath("(//tr[@data-type='file' or @data-type='dir']//a[@data-action='menu'])["+i+"]")).click();
                 BrowserUtils.waitFor(2);
                 deleteFile.click();
             }
@@ -236,42 +246,107 @@ public class FilesPage extends BasePage {
 
     }
 
+    public void restoreFile(String item) {
+        int i=0;
+        deletedFiles.click();
+        for (WebElement file: deletedFilesList) {
+            ++i;
+            if(item.equals(file.getAttribute("data-original-title"))){
+                Driver.get().findElement(By.xpath("(//a[@class='action action-restore permanent'][@data-action='Restore'])["+i+"]/span")).click();
+            }
+
+        }
+
+    }
+
     public int countFile() {
-       navigateTo("files");
+       //navigateTo("files");
+       BrowserUtils.waitFor(2);
        int fileAmount=0;
         for (WebElement fl:file) {
             ++fileAmount;
         }
-        //System.out.println("fileAmount = " + fileAmount);
+        System.out.println("fileAmount = " + fileAmount);
         return fileAmount;
 
     }
 
     public int countFolder() {
-        navigateTo("files");
+        //navigateTo("files");
+        BrowserUtils.waitFor(2);
         int folderAmount=0;
-        for (WebElement fl:folder) {
+        for (WebElement fl:folderList) {
             ++folderAmount;
         }
-        //System.out.println("folderAmount = " + folderAmount);
+        System.out.println("folderAmount = " + folderAmount);
         return folderAmount;
 
     }
 
     public int getDisplayedFileNumber() {
-        navigateTo("files");
+       //navigateTo("files");
+        scrollDown();
+        int fileNum=0;
        String[] str=fileDisAmount.getText().split(" ");
-       int fileNum=Integer.parseInt(str[0]);
-        //System.out.println("fileNum = " + fileNum);
+       try {
+           fileNum=Integer.parseInt(str[0]);
+           System.out.println("fileNum = " + fileNum);
+       }catch (NumberFormatException ex){
+           ex.printStackTrace();
+       }
         return fileNum;
     }
 
     public int getDisplayedFolderNumber() {
-        navigateTo("files");
+        //navigateTo("files");
+        scrollDown();
+        int folderNum=0;
        String [] str=folderDisAmount.getText().split(" ");
-       int folderNum= Integer.parseInt(str[0]);
-        //System.out.println("folderNum = " + folderNum);
+        try {
+            folderNum= Integer.parseInt(str[0]);
+            System.out.println("folderNum = " + folderNum);
+        }catch (NumberFormatException ex){
+            ex.printStackTrace();
+        }
         return folderNum;
     }
+
+    public void moveToBack( String item) {
+        int i=0;
+        for (WebElement file:filesList) {
+            i++;
+            if (item.equals(file.getAttribute("data-file"))) {
+                Driver.get().findElement(By.xpath("(//a[@class='action action-menu permanent'])"+"["+i+"]")).click();
+                BrowserUtils.waitFor(2);
+                moveOrCopy.click();
+                BrowserUtils.waitFor(1);
+                homeFolderIcon.click();
+                moveButton.click();
+
+            }
+        }
+
+    }
+    public String isInFolder(String item, String folder) {
+        openItem(folder);
+        scrollDown();
+        for (WebElement file: filesList) {
+            if (item.equals(file.getAttribute("data-file"))){
+                return file.getAttribute("data-file");
+            }
+        }
+       return null;
+    }
+
+    public boolean isInMainFileList(String item) {
+        for (WebElement file:filesList) {
+            if (item.equals(file.getAttribute("data-file"))){
+                return  true;
+            }
+        }
+        return  false;
+    }
+
+
 
 }

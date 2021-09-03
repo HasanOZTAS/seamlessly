@@ -8,10 +8,7 @@ import net.seamlessly.pages.FilesPage;
 import net.seamlessly.utilities.Driver;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-
-import javax.swing.*;
-import java.io.File;
+import org.openqa.selenium.WebElement;
 
 public class UploadEditDeleteFileStepDefs {
 
@@ -66,22 +63,14 @@ public class UploadEditDeleteFileStepDefs {
     @Then("the user should see {string} on page")
     public void the_user_should_see_on_page(String addedFile) {
 
-        if (addedFile.contains(".")) {
-            String [] str=addedFile.split("\\.");
-
-            String expectedUploadedFile=str[0];
+            String expectedUploadedFile=addedFile;
             String actualUploadedFile=new FilesPage().isUploadedOrCreated(addedFile);
 
             System.out.println("expectedUploadedFile = " + expectedUploadedFile);
             System.out.println("actualUploadedFile = " + actualUploadedFile);
-            Assert.assertEquals(expectedUploadedFile, actualUploadedFile);
-        }
-        else {
-            String expectedFolder=addedFile;
-            String actualFolder=new FilesPage().isUploadedOrCreated(addedFile);
 
-            Assert.assertEquals(expectedFolder, actualFolder);
-        }
+            Assert.assertEquals(expectedUploadedFile, actualUploadedFile);
+            new FilesPage().deleteItem(addedFile);
 
     }
 
@@ -90,16 +79,26 @@ public class UploadEditDeleteFileStepDefs {
         new FilesPage().moveTo(item, folder);
     }
 
-    @Then("the user should see {string} in {string}")
-    public void the_user_should_see_in(String item, String folder) {
-        new FilesPage().openItem(folder);
-        String path="//tr[@data-path='/"+folder+"']//span[text()='"+item+"']";
-        new FilesPage().scrollDown();
-        String actualresult=Driver.get().findElement(By.xpath(path)).getText();
+    @Then("the user should see moved {string} in {string}")
+    public void the_user_should_see_moved_in(String item, String folder) {
+        String actualResult=new FilesPage().isInFolder(item, folder);
         String expectedResult=item;
 
-        Assert.assertEquals(expectedResult, actualresult);
+        Assert.assertEquals(expectedResult, actualResult);
+        new FilesPage().moveToBack(item);
+    }
 
+    @Then("the user should see copied {string} in {string} and FileList")
+    public void the_user_should_see_copied_in(String item, String folder) {
+        if(new FilesPage().isInMainFileList(item)) {
+
+            String actualResult=new FilesPage().isInFolder(item, folder);
+            String expectedResult=item;
+
+            Assert.assertEquals(expectedResult, actualResult);
+            new FilesPage().deleteItem(item);
+
+        }
     }
 
     @When("the user copy the {string} to {string}")
@@ -118,6 +117,7 @@ public class UploadEditDeleteFileStepDefs {
         String actualResult=new FilesPage().isInDeletedFile(item);
 
         Assert.assertEquals(expectedResult, actualResult);
+        new FilesPage().restoreFile(item);
 
     }
 
