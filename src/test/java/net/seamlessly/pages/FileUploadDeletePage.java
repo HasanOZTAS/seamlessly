@@ -12,8 +12,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class FilesPage extends BasePage {
-   public FilesPage(){
+public class FileUploadDeletePage extends BasePage {
+   public FileUploadDeletePage(){
        PageFactory.initElements(Driver.get(), this);
    }
 
@@ -26,29 +26,8 @@ public class FilesPage extends BasePage {
     @FindBy(xpath = "//tr[@data-type='file' or @data-type='dir']")
     protected List<WebElement> filesList;
 
-//    @FindBy(xpath = "//span[@class='innernametext']")
-//    protected WebElement filesName;
-
-//    @FindBy(xpath = "//span[@class='extension']")
-//    protected WebElement filesExt;
-
    @FindBy(css = "#uploadprogressbar")
    protected WebElement progressbar;
-
-//   @FindBy(css = "#checkbox-allnewfiles")
-//   protected WebElement NewFile;
-//
-//   @FindBy(css = "#checkbox-allexistingfiles")
-//   protected WebElement existingFile;
-//
-//   @FindBy(css = "#ioc-dialog-fileexists-content")
-//   protected WebElement fileExists;
-//
-//   @FindBy(css = ".continue")
-//   protected WebElement continueButton;
-//
-//   @FindBy(css = ".cancel primary")
-//    protected WebElement cancelButton;
 
    @FindBy(xpath = "(//span[@class='displayname'])[2]")
    protected WebElement newFolder;
@@ -92,13 +71,8 @@ public class FilesPage extends BasePage {
     @FindBy(xpath = "//div[@class='crumb']")
     protected WebElement homeFolderIcon;
 
-//    @FindBy(xpath = "//*[@class='nametext']")
-//    protected List<WebElement> fileList;
-//
     @FindBy(xpath = "//td[@class='filename']//span[@class='nametext extra-data']")
     protected List<WebElement> deletedFilesList;
-
-
 
 
 
