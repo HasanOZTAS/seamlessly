@@ -73,9 +73,11 @@ public class SearchDashboardPhotosDefs {
 
     @Then("User can see only the images files with the extension of {string} or {string}")
     public void user_can_see_only_the_images_files_with_the_extension_of_jpeg_jpg(String jpeg,String jpg) {
-        System.out.println("photo file name = " + new SearchDashboardPhotosPage().extension.getAttribute("href"));
-        Assert.assertTrue(new SearchDashboardPhotosPage().extension.getAttribute("href").contains(jpeg)||
-                new SearchDashboardPhotosPage().extension.getAttribute("href").contains(jpg));
+        List<WebElement> extensions = new SearchDashboardPhotosPage().extensions;
+        for (WebElement extension : extensions) {
+            System.out.println("extension = " + extension.getAttribute("href"));
+            Assert.assertTrue(extension.getAttribute("href").contains(jpeg)||extension.getAttribute("href").contains(jpg));
+        }
 
         BrowserUtils.waitFor(3);
     }
