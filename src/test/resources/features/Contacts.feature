@@ -18,11 +18,13 @@ Feature: Contacts Module
       | Mike       | SMITH     | Mike       |
       | Seracettin | Neettin   | Seracettin |
 
+
   @SEAMLES-469
   Scenario: User can see all the contacts as a list inside the middle column and total number
     When the user clicks on All contacts button
     Then the user should see all the contacts as a list inside the middle column
     And the user should see total number of contacts
+
 
   @SEAMLES-470
   Scenario: User can change the profile picture of any contact by using “Choose from files” option
@@ -30,6 +32,7 @@ Feature: Contacts Module
     And the user clicks on the avatar icon on the right side
     Then the user clicks on Choose from files option
     And the user should be able to change the profile picture
+
 
   @SEAMLES-471
   Scenario Outline: User can delete any selected contact

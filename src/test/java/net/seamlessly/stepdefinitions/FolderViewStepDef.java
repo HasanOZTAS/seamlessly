@@ -87,9 +87,18 @@ public class FolderViewStepDef {
         FolderViewPage FP = new FolderViewPage();
         BrowserUtils.waitForVisibility(FP.toggleview1,15);
         String actual = FP.toggleview1.getAttribute("class");
-        System.out.println(actual);
 
-        Assert.assertFalse(actual.contains("view-grid"));
+
+       if(actual.contains("view-grid")){
+           Assert.assertTrue(actual.contains("view-grid"));
+           System.out.println("actual = " + actual);
+       }else {
+           Assert.assertFalse(actual.contains("view-grid"));
+           System.out.println("actual = " + actual);
+       }
+
+
+
 
 
 
@@ -105,13 +114,18 @@ public class FolderViewStepDef {
     @Then("the order of the folders should change by view")
     public void theOrderOfTheFoldersShouldChangeByView() {
         FolderViewPage FP = new FolderViewPage();
-        String actual = FP.toggleview1.getAttribute("class");
+        String expected = FP.toggleview1.getAttribute("class");
 
-        Assert.assertTrue(actual.contains("view-grid"));
+        if(expected.contains("view-grid")){
+            Assert.assertTrue(expected.contains("view-grid"));
+            System.out.println("expected = " + expected);
+        }else{
+
+            Assert.assertFalse(expected.contains("view-grid"));
+            System.out.println("expected = " + expected);
+        }
+
 
     }
-
-
-
 
 }

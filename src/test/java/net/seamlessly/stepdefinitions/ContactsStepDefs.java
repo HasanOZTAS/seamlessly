@@ -7,13 +7,7 @@ import net.seamlessly.pages.ContactsPage;
 import net.seamlessly.utilities.BrowserUtils;
 import org.junit.Assert;
 
-
-
-
 public class ContactsStepDefs {
-
-
-
 
     @Given("the user clicks on {string} module")
     public void the_user_clicks_on_module(String module) {

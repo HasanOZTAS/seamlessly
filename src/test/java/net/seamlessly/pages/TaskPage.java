@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.Select;
 import java.util.List;
 
 public class TaskPage extends BasePage{
+
 @FindBy(xpath = "//span[contains(.,'Add List…')]")
 public WebElement AddListIcon;
 

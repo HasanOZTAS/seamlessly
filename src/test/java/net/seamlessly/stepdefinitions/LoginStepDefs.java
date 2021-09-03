@@ -61,12 +61,12 @@ public class LoginStepDefs {
 
     @Given("the user is logged in {string} and {string} with {string}")
     public void the_user_is_logged_in_and_with(String userName, String password, String submitType) {
-    new LoginPage().login(userName,password,submitType);
+        new LoginPage().login(userName,password,submitType);
     }
 
     @Given("the user enters the password")
     public void the_user_enters_the_password() {
- new LoginPage().userPasswordBox.sendKeys(ConfigurationReader.get("password"));
+        new LoginPage().userPasswordBox.sendKeys(ConfigurationReader.get("password"));
     }
 
     @Then("the user should see the password form of dots")
