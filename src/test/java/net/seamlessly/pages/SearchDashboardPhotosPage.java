@@ -30,8 +30,8 @@ public class SearchDashboardPhotosPage extends BasePage {
     @FindBy(xpath = "//*[@id='appmenu']/li[2]")
     public WebElement photosIcon;
 
-    @FindBy (xpath = "//*[@id='app-content-vue']/div/div[2]/a[1]")
-    public WebElement extension;
+    @FindBy (xpath = "//*[@id='app-content-vue']/div/div[2]/a")
+    public List<WebElement> extensions;
 
 
 }

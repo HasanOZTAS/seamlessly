@@ -17,7 +17,7 @@ Feature: Search Functionalities Dashboard Photos
     When User can click contacts icon
     And  User can write "Ali" into the contact text box
     Then User can see the contact name related to keyword "Ali"
-  @SEAMLES_490
+  @SEAMLES_490 @wip
   Scenario:User can see only the images files with the extension of .jpeg/.jpg under the Photos module
            when uploaded them
 
