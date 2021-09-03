@@ -11,10 +11,12 @@ import org.junit.runner.RunWith;
         },
         features ="src/test/resources/features",
         glue="net/seamlessly/stepdefinitions",
-        tags="@wip",
-        //tags="@SEAMLES-483 or @SEAMLES-484 or @SEAMLES-485 or @SEAMLES-486 or @SEAMLES-487 or @SEAMLES-488",
-        dryRun = false
 
+        tags="@wip",
+
+
+
+        dryRun = false
 
 )
 public class CukesRunner {
